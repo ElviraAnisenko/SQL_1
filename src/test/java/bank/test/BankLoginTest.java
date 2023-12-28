@@ -71,7 +71,7 @@ public class BankLoginTest {
         verificationPage.inputCode(verificationCode);
         verificationPage.verifyErrorNotification("Неверно указан код! Попробуйте ещё раз.");
         verificationPage.inputCode(verificationCode);
-        verificationPage.verifyErrorNotification("Ошибка! " + "Пользователь заблокирован");
+        verificationPage.verifyErrorNotification("Система заблокирована!");
 
     }
 
