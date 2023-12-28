@@ -52,12 +52,26 @@ public class BankLoginTest {
     }
 
     @Test
-    void shouldNotAuthWithInValidLogin() {
+    void shouldNotAuthWithInValidCode() {
         var authInfo = DataHelper.getUser();
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.getInvalidCode();
         verificationPage.inputCode(verificationCode);
         verificationPage.verifyErrorNotification("Неверно указан код! Попробуйте ещё раз.");
+
+    }
+
+    @Test
+    void shouldBlockUserIfInputThreeTimesInvalidCode() {
+        var authInfo = DataHelper.getUser();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataHelper.getInvalidCode();
+        verificationPage.inputCode(verificationCode);
+        verificationPage.verifyErrorNotification("Неверно указан код! Попробуйте ещё раз.");
+        verificationPage.inputCode(verificationCode);
+        verificationPage.verifyErrorNotification("Неверно указан код! Попробуйте ещё раз.");
+        verificationPage.inputCode(verificationCode);
+        verificationPage.verifyErrorNotification("Ошибка! " + "Пользователь заблокирован");
 
     }
 
